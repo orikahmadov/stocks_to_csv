@@ -13,13 +13,17 @@ filtered_stock_information = [b for b in stock_information if b != "\xa0"]      
 new_list = []                                               
 for index in range(0, len(filtered_stock_information), 8):                                            #spliting the list by 8 
     new_list.append(filtered_stock_information[index : index + 8])
-with open("stock_prices.csv", "w", encoding="UTF-8") as f:                                            #writing it to a file
-    for i in filtered_header:               
-        f.write(f"{i},")
-    for a in new_list:
-        f.write("\n")
-        f.write(f"{','.join(a)}")
-
+try:                                                                                                  #Writing it to CSV
+    with open("stock_prices.csv", "w", encoding="UTF-8") as f:
+        for i in filtered_header:
+            f.write(f"{i},")
+        for a in new_list:
+            f.write("\n")
+            f.write(f"{','.join(a)}")
+except FileNotFoundError:
+    print(FileNotFoundError)
+else:
+    print(f"Data Transferred to CSV File")
 
 
 
